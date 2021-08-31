@@ -1,16 +1,16 @@
 ﻿{
     "nickname": "jaepill",
-    "energy": 0,
+    "energy": -4588,
     "soldierList": [
         {
             "name": "진흙병사",
-            "amount": 0,
+            "amount": 16,
             "price": 150,
             "ePs": 1
         },
         {
             "name": "바위병사",
-            "amount": 0,
+            "amount": 2,
             "price": 1200,
             "ePs": 10
         }
