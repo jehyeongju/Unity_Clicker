@@ -26,9 +26,16 @@ public class UpgradePanel : MonoBehaviour
 
     public void OnClickPurchase()
     {
+        if (GameManager.Instance.CurrentUser.energy < soldier.price)
+        {
+            return;
+        }
         GameManager.Instance.CurrentUser.energy -= soldier.price;
         Soldier soldierInList = GameManager.Instance.CurrentUser.soldierList.Find((x) => x == soldier);
         soldierInList.amount++;
+        soldier.price = (long)(soldierInList.price * 1.25f);
+        amountText.text = string.Format("{0}", soldierInList.amount);
+        priceText.text = string.Format("{0} ¿¡³ÊÁö", soldierInList.price);
         GameManager.Instance.uiManager.UpdateEnergyPanel();
     }
 }

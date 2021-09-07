@@ -13,6 +13,16 @@ public class GameManager : MonoSingleton<GameManager>
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
 
     public UIManager uiManager { get; private set; }
+
+    public void EarnEnergyPerSecond()
+    {
+        foreach(Soldier soldier in user.soldierList)
+        {
+            user.energy += soldier.ePs * soldier.amount;
+        }
+        uiManager.UpdateEnergyPanel();
+    }
+
     private void Awake()
     {
         SAVE_PATH = Application.dataPath + "/Save";
@@ -25,6 +35,7 @@ public class GameManager : MonoSingleton<GameManager>
         uiManager = GetComponent<UIManager>();
 
         InvokeRepeating("SaveToJson", 1f, 60f);
+        InvokeRepeating("EarnEnergyPerSecond", 0f, 1f);
     }
 
     private void LoadFromJson()
@@ -50,8 +61,6 @@ public class GameManager : MonoSingleton<GameManager>
         string json = JsonUtility.ToJson(user, true);
         File.WriteAllText(SAVE_PATH + SAVE_FILENAME, json, System.Text.Encoding.UTF8);
     }
-
-
 
     private void OnApplicationQuit()
     {
