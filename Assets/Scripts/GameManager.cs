@@ -7,6 +7,9 @@ public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField]
     private User user = null;
+    [SerializeField]
+    private Transform textPool = null;
+    public Transform Pool { get { return textPool; } }
     public User CurrentUser { get { return user; } }
 
     private string SAVE_PATH = "";
@@ -64,6 +67,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void OnApplicationQuit()
     {
-        SaveToJson();
+       SaveToJson();
     }
 }

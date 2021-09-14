@@ -13,15 +13,23 @@ public class UpgradePanel : MonoBehaviour
     private Text amountText = null;
     [SerializeField]
     private Button purchaseButton = null;
+    [SerializeField]
+    private Sprite[] soldierSprite = null;
 
     private Soldier soldier = null;
 
     public void SetValue(Soldier soldier)
     {
+        this.soldier = soldier;
+        UpdateUI();
+    }
+
+    public void UpdateUI()
+    {
+        soldierImage.sprite = soldierSprite[soldier.imageNnmber];
         soldierNameText.text = soldier.name;
         priceText.text = string.Format("{0} 에너지", soldier.price);
         amountText.text = string.Format("{0}", soldier.amount);
-        this.soldier = soldier;
     }
 
     public void OnClickPurchase()
@@ -34,8 +42,7 @@ public class UpgradePanel : MonoBehaviour
         Soldier soldierInList = GameManager.Instance.CurrentUser.soldierList.Find((x) => x == soldier);
         soldierInList.amount++;
         soldier.price = (long)(soldierInList.price * 1.25f);
-        amountText.text = string.Format("{0}", soldierInList.amount);
-        priceText.text = string.Format("{0} 에너지", soldierInList.price);
+        UpdateUI();
         GameManager.Instance.uiManager.UpdateEnergyPanel();
     }
 }

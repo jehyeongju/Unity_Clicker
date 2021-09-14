@@ -3,6 +3,7 @@
 public class Soldier
 {
     public string name;
+    public int imageNnmber;
     public int amount;
     public long price;
     public long ePs;
